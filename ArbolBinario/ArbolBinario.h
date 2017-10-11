@@ -28,6 +28,7 @@ public:
 
     void print();
 
+    int contarPorNivel(unsigned int);
 };
 
 
@@ -145,5 +146,11 @@ void ArbolBinario<T>::print() {
         raiz->print(false, "");
 }
 
+template<class T>
+int ArbolBinario<T>::contarPorNivel(unsigned int L) {
+    if (raiz == NULL)
+        throw -1;
+    raiz->contarPorNivel(L);
+}
 
 #endif //HASHMAP_H

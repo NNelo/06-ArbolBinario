@@ -28,6 +28,8 @@ public:
 
     void postorder();
 
+    int contarPorNivel(unsigned int);
+
     void print(bool esDerecho, std::string identacion) {
         if (der != NULL) {
             der->print(true, identacion + (esDerecho ? "     " : "|    "));
@@ -165,5 +167,17 @@ void NodoArbol<T>::postorder() {
     if (der != NULL) der->postorder();
     cout << dato << ", ";
 }
+
+template<class T>
+int NodoArbol<T>::contarPorNivel(unsigned int L) {
+    if (L == 0)
+        return 1;
+    if (izq != NULL)
+        return 1 + izq->contarPorNivel(L - 1);
+    if (der != NULL)
+        return 1 + der->contarPorNivel(L - 1);
+}
+
+//visualalgo & xckd
 
 #endif //HASHENTRY_H
