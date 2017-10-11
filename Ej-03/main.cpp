@@ -3,22 +3,34 @@
 
 using namespace std;
 
+const int cant = 30;
+
 int main() {
     std::cout << "Ejercicio 06/03\n" << std::endl;
     ArbolBinario<int> maokai;
-    maokai.put(5);
-    maokai.put(3);
-    maokai.put(7);
-    maokai.put(1);
-    maokai.put(2);
-    maokai.put(4);
-    maokai.put(6);
-    maokai.put(8);
-    maokai.put(9);
+    int staticArray[cant];
+
+    srand(time(NULL));
+    for (int i = 0; i < cant; ++i) {
+        staticArray[i] = rand() % 401 + 100;
+    }
+
+    int cont = cant;
+    for (int j = 0; j < cant; ++j) {
+        try {
+            maokai.put(staticArray[j]);
+        } catch (int e) {
+            cont--;
+        }
+    }
 
     maokai.print();
-
-    cout << maokai.contarPorNivel(8);
+    int i = 0, tmp;
+    do {
+        tmp = maokai.contarPorNivel(i);
+        cout << "Hojas en nivel " << i << ": " << tmp << endl;
+        ++i;
+    } while (tmp != 0);
 
     return 0;
 }

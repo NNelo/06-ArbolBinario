@@ -169,15 +169,29 @@ void NodoArbol<T>::postorder() {
 }
 
 template<class T>
-int NodoArbol<T>::contarPorNivel(unsigned int L) {
+int NodoArbol<T>::contarPorNivel(unsigned int L) {      // y si l es mayor?
     if (L == 0)
         return 1;
-    if (izq != NULL)
-        return 1 + izq->contarPorNivel(L - 1);
-    if (der != NULL)
-        return 1 + der->contarPorNivel(L - 1);
+    int c = 0;
+    if (izq != NULL) {
+        c += izq->contarPorNivel(L - 1);
+    }
+    if (der != NULL) {
+        c += der->contarPorNivel(L - 1);
+    }
+    return c;
 }
 
 //visualalgo & xckd
+
+
+
+
+//if (L == 0)
+//return 1;
+//if (izq != NULL)
+//return 1 + izq->contarPorNivel(L - 1);
+//if (der != NULL)
+//return 1 + der->contarPorNivel(L - 1);
 
 #endif //HASHENTRY_H
