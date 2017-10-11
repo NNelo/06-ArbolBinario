@@ -30,6 +30,10 @@ public:
 
     int contarPorNivel(unsigned int);
 
+    void espejo();
+
+    bool compara(NodoArbol *);
+
     void print(bool esDerecho, std::string identacion) {
         if (der != NULL) {
             der->print(true, identacion + (esDerecho ? "     " : "|    "));
@@ -182,16 +186,37 @@ int NodoArbol<T>::contarPorNivel(unsigned int L) {      // y si l es mayor?
     return c;
 }
 
+template<class T>
+void NodoArbol<T>::espejo() {
+    NodoArbol *aux = izq;
+    izq = der;
+    der = aux;
+    if (izq != NULL)
+        izq->espejo();
+    if (der != NULL)
+        der->espejo();
+}
+
+template<class T>
+bool NodoArbol<T>::compara(NodoArbol *a) {
+    if (this->dato != a->getDato())
+        return false;
+    if (izq == NULL ^ a->izq == NULL) // xor operator
+        return false;
+    if (der == NULL ^ a->der == NULL)
+        return false;
+
+    bool estIzq = true, estDer = true;
+
+    if (izq != NULL)
+        estIzq = izq->compara(a->izq);
+    if (der != NULL)
+        estDer = der->compara(a->der);
+
+    return estIzq == estDer;
+}
+
 //visualalgo & xckd
 
-
-
-
-//if (L == 0)
-//return 1;
-//if (izq != NULL)
-//return 1 + izq->contarPorNivel(L - 1);
-//if (der != NULL)
-//return 1 + der->contarPorNivel(L - 1);
 
 #endif //HASHENTRY_H

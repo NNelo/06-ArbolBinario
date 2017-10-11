@@ -29,6 +29,10 @@ public:
     void print();
 
     int contarPorNivel(unsigned int);
+
+    void espejo();
+
+    bool operator==(ArbolBinario);
 };
 
 
@@ -151,6 +155,25 @@ int ArbolBinario<T>::contarPorNivel(unsigned int L) {
     if (raiz == NULL)
         throw -1;
     raiz->contarPorNivel(L);
+}
+
+template<class T>
+void ArbolBinario<T>::espejo() {
+    if (raiz == NULL)
+        throw -1;
+    raiz->espejo();
+}
+
+template<class T>
+bool ArbolBinario<T>::operator==(ArbolBinario A) {
+    if (this->raiz == NULL && A.raiz == NULL)
+        return true;
+
+    if (this->raiz != NULL && A.raiz != NULL) {
+        return this->raiz->compara(A.raiz);
+    }
+
+    return false;
 }
 
 #endif //HASHMAP_H
